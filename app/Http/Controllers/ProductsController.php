@@ -45,6 +45,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
 
+        // validation
         $validator = Validator::make($request->all(), [
             "name" => "required|string|max:120",
             "country" => "required|exists:countries,id",
@@ -63,6 +64,7 @@ class ProductsController extends Controller
             "inventory.*.quantity.numeric" => "Quantity must be a number.",
         ]);
 
+        // validation errors
         if ($validator->fails()) {
             return response()->json(["code" => 1, "errors" => $validator->errors()->toArray(), "input" => $request->all()]);
         } else {
@@ -243,7 +245,6 @@ class ProductsController extends Controller
                         $inventory_ids = array_slice($inventory_ids, count($inputs["inventory"]));
                         Inventory::whereIn("id", $inventory_ids)->delete();
                     }
-
 
                     // delete old uploaded file
                     if ($uploaded_path && $product_image)

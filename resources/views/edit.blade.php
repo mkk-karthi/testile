@@ -104,7 +104,6 @@
             const getStateOptions = (id, emptyValue = true) => {
 
                 $.get(`${location.origin}/state_options/${id}`, (res) => {
-                    console.log("res", res)
                     var content = "";
 
                     if (res.data) {
@@ -124,7 +123,6 @@
             }
             $("#country").change((ele) => {
                 const id = ele.target.value;
-                console.log(id);
                 $("#state").val("");
                 getStateOptions(id);
             })
@@ -226,7 +224,6 @@
                         processData: false,
                         contentType: false,
                         success: (res) => {
-                            console.log(res);
                             if (res.code == 1) {
                                 $("#product-form-submit").prop("disabled", false)
 
@@ -312,7 +309,7 @@
 
                     $(`#delete-${inventoryKey}-inventory`).click(function() {
 
-                        // check atl east 1 inventory is required
+                        // check at least 1 inventory is required
                         if ($(`#inventory-details`).children().length > 1) {
 
                             let id = $(this).attr("data-id");
